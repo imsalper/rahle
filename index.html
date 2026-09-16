@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Rahle (رَحْلَة) — Hatim, Zikirmatik, Namaz Hocası & 4 Mezhepli Fetva</title>
+  <meta name="description" content="30 Günlük Hatim Takibi, Sesli Karaoke Okuma, Akıllı Haptik Zikirmatik, Rekat Rekat Namaz Hocası ve 4 Mezhep Karşılaştırmalı AI Fetva Rehberi" />
+  <meta name="theme-color" content="#061812" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/jpeg" href="icon.jpg" />
+
+  <!-- Google Fonts: Inter, Space Grotesk, Amiri (Arapça Hat), JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+
+  <!-- ÜST UYGULAMA BAŞLIĞI (HEADER) -->
+  <header class="app-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-icon" aria-label="Rahle Logo">
+        <img src="icon.jpg" alt="Rahle Logo" style="width: 100%; height: 100%; border-radius: 7px; object-fit: cover;" />
+      </div>
+      <div class="brand-titles">
+        <h1>Rahle <span class="brand-arabic-sub">رَحْلَة</span></h1>
+        <p class="brand-tagline">Hatim, Zikir & İslami Yaşam Rehberi</p>
+      </div>
+    </div>
+    <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" title="Temayı Değiştir">
+      ☀️ <span class="hide-mobile">Açık Mod</span>
+    </button>
+  </header>
+
+  <!-- ANA İÇERİK ALANI -->
+  <main class="main-container">
+
+    <!-- =========================================================
+         MODÜL 1: 30 GÜNLÜK HATİM TAKİBİ & KARAOKE
+         ========================================================= -->
+    <section id="tab-hatim" class="tab-panel active">
+      
+      <!-- 30 Günlük Hedef Planlama Kartı -->
+      <div class="hatim-plan-card">
+        <div class="plan-header-row">
+          <h3>30 Günlük Hatim Takvimi</h3>
+          <span id="hatim-day-badge" class="badge-day">1. Gün / 30 Gün</span>
+        </div>
+
+        <div class="progress-track" aria-label="Hatim İlerlemesi">
+          <div id="hatim-progress-bar" class="progress-fill" style="width: 0%;"></div>
+        </div>
+
+        <div class="plan-stats-row">
+          <span id="hatim-progress-percent">%0 Tamamlandı (0/30 Cüz)</span>
+          <span>Hedef: Günde ~20 Sayfa</span>
+        </div>
+
+        <div id="hatim-target-pages-text" class="target-pages-text">
+          Bugünün Hedefi: 1. Cüz (Sayfa 1 – 20)
+        </div>
+
+        <div class="plan-date-row">
+          <label for="hatim-start-date">Başlangıç Tarihi:</label>
+          <input type="date" id="hatim-start-date" />
+        </div>
+      </div>
+
+      <!-- Geride Kalındı Uyarısı -->
+      <div id="hatim-alert-box" class="alert-warning-box hidden"></div>
+
+      <!-- Sesli Okuma + Karaoke Senkronizasyon Bölümü -->
+      <div class="karaoke-section">
+        <div class="section-title-wrap">
+          <h3><span>🎙️</span> Sesli Okuma & Ayet Vurgulama</h3>
+        </div>
+
+        <div class="karaoke-controls-bar">
+          <select id="karaoke-surah-select" class="select-custom" aria-label="Sûre Seç">
+            <option value="1">1. Fâtiha Sûresi (7 Âyet)</option>
+            <option value="112">112. İhlâs Sûresi (4 Âyet)</option>
+          </select>
+
+          <select id="karaoke-qari-select" class="select-custom" aria-label="Kari Seç">
+            <option value="alafasy">Mişarî Raşid el-Afâsî</option>
+            <option value="abdulbasit">Abdulbâsit Abdussamed (Murattal)</option>
+            <option value="husary">Mahmud Halil el-Husarî</option>
+          </select>
+
+          <button type="button" id="karaoke-play-pause-btn" class="btn-karaoke-play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Dinle & Vurgula</span>
+          </button>
+        </div>
+
+        <!-- Karaoke Ayet Kartları Konteyneri -->
+        <div id="karaoke-verses-container" class="karaoke-verses-wrap"></div>
+      </div>
+
+      <!-- 30 Cüz Matrisi -->
+      <div class="juz-matrix-header">
+        <h3>Kur'an-ı Kerim Cüz Matrisi (30 Cüz)</h3>
+        <button type="button" id="btn-open-hatim-duasi" class="btn-dua-shortcut">
+          🤲 Hatim Duası
+        </button>
+      </div>
+
+      <div id="juz-grid-container" class="juz-grid"></div>
+    </section>
+
+    <!-- =========================================================
+         MODÜL 2: HAPTİK ZİKİRMATİK
+         ========================================================= -->
+    <section id="tab-zikir" class="tab-panel">
+      <div class="zikir-container">
+        
+        <!-- Zikir Bilgi Kartı -->
+        <div class="zikir-meta-card">
+          <div id="zikir-arabic-text" class="zikir-arabic font-arabic">سُبْحَانَ اللَّهِ</div>
+          <h3 id="zikir-name-text" class="zikir-name">Sübhanallah</h3>
+          <p id="zikir-meaning-text" class="zikir-meaning">Allah her türlü eksiklikten ve noksanlıktan münezzehtir.</p>
+        </div>
+
+        <!-- Büyük Dokunmatik Sayaç Kadranı -->
+        <div id="zikir-big-counter" class="zikir-dial-wrap" role="button" aria-label="Zikri Say" tabindex="0">
+          <svg class="zikir-svg-ring" viewBox="0 0 220 220">
+            <circle class="ring-bg" cx="110" cy="110" r="96"></circle>
+            <circle id="zikir-progress-ring" class="ring-progress" cx="110" cy="110" r="96" stroke-dasharray="603.18" stroke-dashoffset="603.18"></circle>
+          </svg>
+
+          <div class="zikir-counter-body">
+            <div id="zikir-count-number" class="counter-number">0</div>
+            <div class="counter-target-text">Hedef: <span id="zikir-target-number">33</span></div>
+            <div id="zikir-lap-number" class="counter-lap-text">0 Tur</div>
+          </div>
+        </div>
+
+        <!-- Zikir Seçimi ve Aksiyon Barı -->
+        <div style="width: 100%; max-width: 440px; margin-bottom: 12px;">
+          <select id="zikir-select-dropdown" class="select-custom" style="width: 100%;" aria-label="Zikir Şablonu"></select>
+        </div>
+
+        <div class="zikir-actions-bar">
+          <button type="button" id="btn-namaz-mode" class="btn-zikir-mode">
+            33'lük Namaz Tesbihatı
+          </button>
+          <button type="button" id="sound-toggle-btn" class="btn-zikir-tool">
+            🔊 Ses Açık
+          </button>
+          <button type="button" id="vibration-toggle-btn" class="btn-zikir-tool">
+            📳 Titreşim Açık
+          </button>
+          <button type="button" id="btn-zikir-reset" class="btn-zikir-tool">
+            ↺ Sıfırla
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MODÜL 3: NAMAZ HOCASI & DUALAR
+         ========================================================= -->
+    <section id="tab-namaz" class="tab-panel">
+      
+      <!-- Cinsiyet Seçimi (Erkek / Kadın Duruş Farkı) -->
+      <div class="gender-switch-wrap">
+        <button type="button" id="gender-erkek-btn" class="gender-btn active">
+          🧔 Erkekler İçin Duruş
+        </button>
+        <button type="button" id="gender-kadin-btn" class="gender-btn">
+          🧕 Kadınlar İçin Duruş
+        </button>
+      </div>
+
+      <!-- Vakitler Yatay Kaydırıcı -->
+      <div class="vakitler-scroller">
+        <button type="button" class="vakit-tab-btn active" data-vakit="sabah">Sabah Namazı</button>
+        <button type="button" class="vakit-tab-btn" data-vakit="ogle">Öğle Namazı</button>
+        <button type="button" class="vakit-tab-btn" data-vakit="ikindi">İkindi Namazı</button>
+        <button type="button" class="vakit-tab-btn" data-vakit="aksam">Akşam Namazı</button>
+        <button type="button" class="vakit-tab-btn" data-vakit="yatsi">Yatsı Namazı</button>
+        <button type="button" class="vakit-tab-btn" data-vakit="vitir">Vitir Vacip</button>
+      </div>
+
+      <!-- Vakit Bilgi Bandı ve Bölüm Seçimi (Sünnet / Farz) -->
+      <div class="namaz-info-banner">
+        <h3 id="namaz-vakit-title">Sabah Namazı (4 Rekat)</h3>
+        <p id="namaz-vakit-desc">2 rekat sünnet ve 2 rekat farz olmak üzere toplam 4 rekattır.</p>
+        <div id="namaz-parts-pills" class="namaz-parts-pills"></div>
+      </div>
+
+      <!-- Rekat Sekmeleri ve Kılınış Adımları -->
+      <div id="namaz-rekat-tabs" class="rekat-tabs-row"></div>
+      <div id="namaz-rekat-steps-container"></div>
+
+      <!-- Namaz Duaları ve Sûreleri -->
+      <div class="dualar-section-header">
+        <h3>Namazda Okunan Sure ve Dualar</h3>
+        <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">
+          Arapça metin, Türkçe okunuş ve manaları
+        </p>
+      </div>
+
+      <div id="namaz-dualar-container"></div>
+    </section>
+
+    <!-- =========================================================
+         MODÜL 4: 4 MEZHEPLİ AI DESTEKLİ FETVA
+         ========================================================= -->
+    <section id="tab-fetva" class="tab-panel">
+      
+      <!-- Fetva Soru Arama Kutusu -->
+      <div class="fetva-search-box">
+        <h3>4 Mezhepli AI Destekli Fıkıh & Fetva</h3>
+        <p>
+          Sorunuzu serbest metin olarak yazın; Hanefi, Şafii, Maliki ve Hanbeli mezheplerinin hüküm, kaynak ve hadis sıhhat derecelerini karşılaştırın.
+        </p>
+
+        <div class="input-with-btn">
+          <input type="text" id="fetva-query-input" class="fetva-input" placeholder="Örn: Abdesti bozan şeyler, kripto para, aşı orucu bozar mı..." />
+          <button type="button" id="fetva-search-btn" class="btn-fetva-search">Sorgula</button>
+        </div>
+
+        <!-- Hızlı Öneri Konuları -->
+        <div class="fetva-chips-wrap">
+          <button type="button" class="fetva-chip" data-query="Abdesti Bozan Şeyler">💧 Abdesti Bozanlar</button>
+          <button type="button" class="fetva-chip" data-query="Kripto Para ve Borsa">🪙 Kripto Para & Borsa</button>
+          <button type="button" class="fetva-chip" data-query="Oruçluyken İğne ve Aşı">💉 Oruçta İğne / Aşı</button>
+          <button type="button" class="fetva-chip" data-query="Kadınların Seferi Sayılması">✈️ Kadınlarda Seferilik</button>
+          <button type="button" class="fetva-chip" data-query="Diş Fırçalamak Orucu Bozar mı">🪥 Diş Fırçalama & Oruç</button>
+          <button type="button" class="fetva-chip" data-query="Cemaatle Namazda Fatiha">🕌 Cemaatle Namazda Fatiha</button>
+        </div>
+      </div>
+
+      <!-- Karşılaştırmalı Sonuç Kartı (Varsayılan Olarak Gizli, Arama ile Açılır) -->
+      <div id="fetva-result-container" class="hidden"></div>
+
+      <!-- Sabit Resmi Doğrulama Kutusu -->
+      <div class="official-verification-card">
+        <h4><span>🏛️</span> Resmi ve Güvenilir Fetva Kanalları</h4>
+        <p>
+          Dini hükümlerde kesin fetva ve şahsi durum değerlendirmesi için T.C. Diyanet İşleri Başkanlığı'nın yetkili kanallarına başvurabilirsiniz.
+        </p>
+
+        <div class="verification-links-grid">
+          <a href="https://fetva.diyanet.gov.tr" target="_blank" rel="noopener noreferrer" class="verify-link-btn">
+            🔗 Diyanet Fetva Portalı
+          </a>
+          <a href="https://www.turkiye.gov.tr/diyanet-isleri-dini-soru-sorma" target="_blank" rel="noopener noreferrer" class="verify-link-btn">
+            📱 e-Devlet Soru Sorma
+          </a>
+          <a href="tel:190" class="verify-link-btn">
+            📞 ALO 190 Fetva Hattı
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MODÜL 5: PROFİL & İSTATİSTİKLER
+         ========================================================= -->
+    <section id="tab-profil" class="tab-panel">
+      
+      <div class="profile-stats-grid">
+        <div class="stat-box">
+          <div id="profil-today-zikir" class="stat-val">0 Adet</div>
+          <div class="stat-label">Bugünkü Zikir Sayısı</div>
+        </div>
+        <div class="stat-box">
+          <div id="profil-completed-juz" class="stat-val">0 / 30 Cüz</div>
+          <div class="stat-label">Tamamlanan Cüz</div>
+        </div>
+      </div>
+
+      <div class="daily-inspiration-card">
+        <span class="inspiration-badge">GÜNÜN ÂYET / HADİS-İ ŞERİFİ</span>
+        <div id="profil-daily-verse"></div>
+      </div>
+
+      <!-- Uygulama Hakkında Kartı -->
+      <div style="background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-top: 18px;">
+        <h4 style="margin: 0 0 8px; font-size: 15px; color: var(--text-gold);">Rahle (رَحْلَة) Hakkında</h4>
+        <p style="font-size: 12.5px; color: var(--text-muted); margin: 0 0 10px; line-height: 1.5;">
+          Rahle; 30 günlük planlı Kur'an hatmi takibi, senkronize sesli ayet vurgulama (karaoke), haptik ve sesli zikirmatik, kadın/erkek duruşlu namaz hocası ve 4 mezhep mukayeseli fıkıh rehberi sunan modern bir İslami mobil yaşam asistanıdır.
+        </p>
+        <div style="font-size: 11.5px; color: var(--text-muted);">
+          Sürüm: <strong>1.0.0 (PWA & Mobil Uyumlu)</strong> · Çevrimdışı Çalışabilir (Offline Ready)
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       HATİM DUASI MODAL PENCERESİ
+       ========================================================= -->
+  <div id="hatim-duasi-modal" class="modal-overlay hidden">
+    <div class="modal-dialog">
+      <div class="modal-header-row">
+        <h3>🤲 Hatim Duası (Arapça & Türkçe)</h3>
+        <button type="button" id="hatim-duasi-close-btn" class="modal-close-icon" aria-label="Kapat">&times;</button>
+      </div>
+
+      <div class="dua-arabic-full font-arabic">
+بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ
+اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ.
+اَللّٰهُمَّ رَبَّنَا تَقَبَّلْ مِنَّا، إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ. وَتُبْ عَلَيْنَا يَا مَوْلَانَا، إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ.
+اَللّٰهُمَّ اجْعَلِ الْقُرْآنَ لَنَا فِي الدُّنْيَا قَرِينًا، وَفِي الْقَبْرِ مُؤْنِسًا، وَفِي الْقِيَامَةِ شَفِيعًا، وَعَلَى الصِّرَاطِ نُورًا، وَإِلَى الْجَنَّةِ رَفِيقًا.
+آمِينَ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ.
+      </div>
+
+      <div class="dua-turkish-full">
+        <strong>Türkçe Manası:</strong><br/>
+        Rahman ve Rahim olan Allah'ın adıyla.<br/>
+        Âlemlerin Rabbi olan Allah'a hamdolsun. Salât ve selâm Efendimiz Hazreti Muhammed'e, onun âline ve ashabına olsun.<br/><br/>
+        Allah'ım! Okuduğumuz hatm-i şerifi dergâh-ı izzetinde kabul eyle. Sen duaları hakkıyla işiten ve bilensin. Tevbelerimizi kabul eyle; şüphesiz Sen tevbeleri çokça kabul eden ve çok merhametli olansın.<br/><br/>
+        Allah'ım! Yüce Kur'an'ı dünyada bize yoldaş, kabirde can dostu, kıyamet gününde şefaatçi, sırat köprüsünde aydınlık ve cennete ulaştıran mukaddes bir nur eyle.<br/><br/>
+        Dualarımızı kabul eyle ey merhametlilerin en merhametlisi olan Allah'ım! Âmin.
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       ALT NAVİGASYON BARI (5 ANA MODÜL)
+       ========================================================= -->
+  <nav class="bottom-nav">
+    <button type="button" class="nav-tab-item active" data-tab="tab-hatim">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+      </svg>
+      <span>Hatim</span>
+    </button>
+
+    <button type="button" class="nav-tab-item" data-tab="tab-zikir">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      <span>Zikirmatik</span>
+    </button>
+
+    <button type="button" class="nav-tab-item" data-tab="tab-namaz">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+      </svg>
+      <span>Namaz</span>
+    </button>
+
+    <button type="button" class="nav-tab-item" data-tab="tab-fetva">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <span>Fetva</span>
+    </button>
+
+    <button type="button" class="nav-tab-item" data-tab="tab-profil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <span>Profil</span>
+    </button>
+  </nav>
+
+  <!-- JAVASCRIPT MODÜLLERİ -->
+  <script src="js/data.js"></script>
+  <script src="js/zikir.js"></script>
+  <script src="js/hatim.js"></script>
+  <script src="js/namaz.js"></script>
+  <script src="js/fetva.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

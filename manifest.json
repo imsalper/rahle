@@ -1,0 +1,16 @@
+{
+  "name": "Rahle — Hatim & Akıllı Zikirmatik",
+  "short_name": "Rahle",
+  "description": "Kur'an-ı Kerim hatim takibi, ortak hatim halkaları ve gelişmiş dijital zikirmatik yoldaşınız.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#061812",
+  "theme_color": "#0b241c",
+  "icons": [
+    {
+      "src": "icon.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg"
+    }
+  ]
+}
