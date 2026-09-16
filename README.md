@@ -5,6 +5,9 @@
   <br/>
   <h3>Kur'an-ı Kerim Hatim Takibi, Akıllı Tesbihat, Rekat Rehberi ve 4 Mezhep Karşılaştırmalı Fıkıh Asistanı</h3>
   <p>Huzur verici yeşil ve toprak tonları, göz yormayan gece modu ve mobil öncelikli PWA mimarisi.</p>
+  <p>
+    🌐 <strong>Canlı Web Uygulaması:</strong> <a href="https://imsalper.github.io/rahle/" target="_blank">https://imsalper.github.io/rahle/</a>
+  </p>
 </div>
 
 ---
